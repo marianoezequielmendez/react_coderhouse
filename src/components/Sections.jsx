@@ -1,24 +1,42 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Container,
   Flex,
-  Spacer,
-  Box,
-  Heading,
-  ListItem,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 
 const Sections = () => {
-  const sections = ["Sección 01", "Sección 02", "Sección 03"];
   return (
     <>
       <ul className="flex">
         <Flex>
-          {sections.map((section, index) => (
-            <Box pr={7} key={index}>
-              <li className="list-decoration">{section}</li>
-            </Box>
-          ))}
+          <Menu>
+            <Link to={"/catalogue"}>
+              <MenuButton as={Button} colorScheme="gray" size="md" mx="2">
+                Catálogo
+              </MenuButton>
+            </Link>
+          </Menu>
+          {/* <Menu>
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+              Categorías
+            </MenuButton>
+            <MenuList>
+              <Link to={`/categories/${"Brand 01"}`}>
+                <MenuItem>Brand 01</MenuItem>
+              </Link>
+              <Link to={`/categories/Brand 02`}>
+                <MenuItem>Brand 02</MenuItem>
+              </Link>
+              <Link to={`/categories/${"Brand 03"}`}>
+                <MenuItem>Brand 03</MenuItem>
+              </Link>
+            </MenuList>
+          </Menu> */}
         </Flex>
       </ul>
     </>

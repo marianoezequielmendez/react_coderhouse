@@ -4,8 +4,13 @@
     align-items: center;
 }
 
+.full-width {
+    width: 100vw;
+}
+
 .list-decoration{
     list-style: none;
+    color: white;
 }
 
 .ItemListContainer{
