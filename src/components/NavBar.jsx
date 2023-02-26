@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
     <>
       <Container maxW="100rem" bg="teal" color="#262626">
-        <Flex alignContent="canter">
+        <Flex>
           <Box p="2" color="white">
             <Heading>
               <Link to={"/"}>Brand</Link>

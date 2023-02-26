@@ -21,22 +21,28 @@ const Sections = () => {
               </MenuButton>
             </Link>
           </Menu>
-          {/* <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              Categorías
+          <Menu>
+            <MenuButton
+              as={Button}
+              colorScheme="gray"
+              size="md"
+              mx="2"
+              rightIcon={<ChevronDownIcon />}
+            >
+              Categories
             </MenuButton>
             <MenuList>
-              <Link to={`/categories/${"Brand 01"}`}>
-                <MenuItem>Brand 01</MenuItem>
+              <Link to={`/category/${"Clasicas"}`}>
+                <MenuItem>Clásicas</MenuItem>
               </Link>
-              <Link to={`/categories/Brand 02`}>
-                <MenuItem>Brand 02</MenuItem>
+              <Link to={`/category/${"Especiales"}`}>
+                <MenuItem>Especiales</MenuItem>
               </Link>
-              <Link to={`/categories/${"Brand 03"}`}>
-                <MenuItem>Brand 03</MenuItem>
+              <Link to={`/category/${"Vegetarianas"}`}>
+                <MenuItem>Vegetarianas</MenuItem>
               </Link>
             </MenuList>
-          </Menu> */}
+          </Menu>
         </Flex>
       </ul>
     </>

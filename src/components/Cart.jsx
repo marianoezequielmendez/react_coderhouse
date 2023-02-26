@@ -1,13 +1,34 @@
-import { Center, Box, Image, Heading } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  FormHelperText,
+  Button,
+  Container,
+  Box,
+  Textarea,
+} from "@chakra-ui/react";
 
 const Cart = () => {
   return (
     <>
-      <Center>
-        <Box boxSize="xxl" my={"35"}>
-          <Heading>CART</Heading>
-        </Box>
-      </Center>
+      <Container className="cart-container">
+        <FormControl>
+          <Box>
+            <FormLabel>¿Cuál es tu nombre?</FormLabel>
+            <Input type="text" />
+            <FormLabel>Dirección</FormLabel>
+            <Input type="text" />
+          </Box>
+          <FormLabel>Observaciones</FormLabel>
+          <Textarea></Textarea>
+          <Box className="btn-send">
+            <Button colorScheme="teal" variant="outline">
+              Realizar la compra
+            </Button>
+          </Box>
+        </FormControl>
+      </Container>
     </>
   );
 };
