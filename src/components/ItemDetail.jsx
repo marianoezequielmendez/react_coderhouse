@@ -21,7 +21,8 @@ import {
 import { Link } from "react-router-dom";
 
 const ItemDetail = ({ product }) => {
-  const { counter, setCounter, cart, setCart } = useContext(CounterContext);
+  const { counter, setCounter, cart, setCart, cartItems, setCartItems } =
+    useContext(CounterContext);
   return (
     <>
       <Center mt={10}>
@@ -56,7 +57,15 @@ const ItemDetail = ({ product }) => {
             <ButtonGroup spacing="12">
               <ItemQuantitySelector stock={product.stock} />
               <Button
-                onClick={() => setCart(cart + counter)}
+                onClick={() => {
+                  setCart(cart + counter);
+                  setCounter(0);
+                  if (counter != 0) {
+                    cartItems.push([product.nombre, product.precio, counter]);
+                  } else {
+                    alert("Debe indicar la cantidad");
+                  }
+                }}
                 colorScheme="teal"
               >
                 Agregar al carrito

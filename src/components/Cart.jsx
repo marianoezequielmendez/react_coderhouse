@@ -1,3 +1,6 @@
+import React, { useContext } from "react";
+import { CounterContext } from "../context/CounterContext";
+import { Link } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -7,28 +10,90 @@ import {
   Container,
   Box,
   Textarea,
+  Flex,
+  Spacer,
+  ButtonGroup,
 } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+} from "@chakra-ui/react";
+import { Icon, createIcon } from "@chakra-ui/react";
 
 const Cart = () => {
+  let precioTotal = 0;
+  const { cart, setCart, cartItems, setCartItems } = useContext(CounterContext);
+  cartItems.map((item) => {
+    precioTotal += item[1] * item[2];
+  });
+
+  const eliminarItem = (e) => {
+    setCartItems(cartItems.filter((i) => i != e));
+  };
+
   return (
     <>
-      <Container className="cart-container">
-        <FormControl>
-          <Box>
-            <FormLabel>¿Cuál es tu nombre?</FormLabel>
-            <Input type="text" />
-            <FormLabel>Dirección</FormLabel>
-            <Input type="text" />
-          </Box>
-          <FormLabel>Observaciones</FormLabel>
-          <Textarea></Textarea>
-          <Box className="btn-send">
-            <Button colorScheme="teal" variant="outline">
-              Realizar la compra
+      <Flex justify="center">
+        <TableContainer>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Producto</Th>
+                <Th>Cantidad</Th>
+                <Th>Precio total</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {cartItems.map((item) => (
+                <Tr key={item.id}>
+                  <Td>{item[0]}</Td>
+                  <Td>{item[2]}</Td>
+                  <Td>${item[1] * item[2]}</Td>
+                  <Td>
+                    <Button
+                      colorScheme="red"
+                      size="sm"
+                      color="#f6f6f6"
+                      onClick={() => {
+                        eliminarItem(item);
+                        setCart(cart - item[2]);
+                      }}
+                    >
+                      <span className="material-symbols-outlined">Delete</span>
+                    </Button>
+                  </Td>
+                </Tr>
+              ))}
+              <Tr>
+                <Td></Td>
+                <Td></Td>
+                <Td>${precioTotal}</Td>
+                <Td></Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Flex>
+      <br />
+      <br />
+      <Flex w="100%" spacing={4} direction="row" align="center">
+        <Spacer />
+        <ButtonGroup spacing="2">
+          <Link to={`/checkout`}>
+            <Button as={Button} colorScheme="teal" size="md" mx="2">
+              Realizar pedido
             </Button>
-          </Box>
-        </FormControl>
-      </Container>
+          </Link>
+        </ButtonGroup>
+        <Spacer />
+      </Flex>
     </>
   );
 };
