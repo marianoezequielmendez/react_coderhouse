@@ -38,6 +38,30 @@ const Cart = () => {
     setCartItems(cartItems.filter((i) => i != e));
   };
 
+  const VerificarCart = ({ cantidadProductos }) => {
+    if (cantidadProductos > 0) {
+      return (
+        <Link to={`/checkout`}>
+          <Button as={Button} colorScheme="teal" size="md" mx="2">
+            Realizar pedido
+          </Button>
+        </Link>
+      );
+    } else {
+      return (
+        <Button
+          as={Button}
+          colorScheme="teal"
+          size="md"
+          mx="2"
+          onClick={() => alert("El carro debe tener al menos un producto.")}
+        >
+          Realizar pedido
+        </Button>
+      );
+    }
+  };
+
   return (
     <>
       <Flex justify="center">
@@ -86,11 +110,7 @@ const Cart = () => {
       <Flex w="100%" spacing={4} direction="row" align="center">
         <Spacer />
         <ButtonGroup spacing="2">
-          <Link to={`/checkout`}>
-            <Button as={Button} colorScheme="teal" size="md" mx="2">
-              Realizar pedido
-            </Button>
-          </Link>
+          <VerificarCart cantidadProductos={cart} />
         </ButtonGroup>
         <Spacer />
       </Flex>

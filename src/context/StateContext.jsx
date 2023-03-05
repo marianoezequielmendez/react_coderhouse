@@ -5,10 +5,20 @@ const StateContext = ({ children }) => {
   const [counter, setCounter] = useState(0);
   const [cart, setCart] = useState(0);
   const [cartItems, setCartItems] = useState([]);
+  const [idOrden, setIdOrden] = useState("");
 
   return (
     <CounterContext.Provider
-      value={{ counter, setCounter, cart, setCart, cartItems, setCartItems }}
+      value={{
+        counter,
+        setCounter,
+        cart,
+        setCart,
+        cartItems,
+        setCartItems,
+        idOrden,
+        setIdOrden,
+      }}
     >
       {children}
     </CounterContext.Provider>

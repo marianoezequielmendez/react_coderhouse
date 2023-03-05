@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { CounterContext } from "../context/CounterContext";
 import { Link } from "react-router-dom";
 import { Text, Flex, Button } from "@chakra-ui/react";
 
 const Brief = () => {
-  let random = "000" + Math.trunc(Math.random() * 1000);
+  const { idOrden, setIdOrden } = useContext(CounterContext);
 
   return (
     <>
@@ -15,7 +16,7 @@ const Brief = () => {
           Su pedido se realizo con éxito
         </Text>
         <Text fontSize="large" m="3">
-          Número de órden: {random}
+          Número de órden: {idOrden}
         </Text>
         <br />
         <br />

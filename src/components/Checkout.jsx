@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CounterContext } from "../context/CounterContext";
 import { Link } from "react-router-dom";
+import { collection, getFirestore, addDoc } from "firebase/firestore";
 import {
   FormControl,
   FormLabel,
@@ -21,14 +22,82 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { doc, setDoc } from "firebase/firestore";
 
 const Checkout = () => {
-  const { cart, setCart, cartItems, setCartItems } = useContext(CounterContext);
+  const tiempoTranscurrido = Date.now();
+  const hoy = new Date(tiempoTranscurrido);
+  const db = getFirestore();
+  const { cart, setCart, cartItems, setCartItems, setIdOrden } =
+    useContext(CounterContext);
+  const [cliente, setCliente] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [observacion, setObservacion] = useState("");
+  let random = Math.trunc(Math.random() * 1000);
 
   let precioTotal = 0;
   cartItems.map((item) => {
     precioTotal += item[1] * item[2];
   });
+
+  const VerificaFormulario = ({ name, address }) => {
+    if (name && address) {
+      return (
+        <Link to={`/brief`}>
+          <Button
+            as={Button}
+            colorScheme="teal"
+            size="md"
+            mx="2"
+            m="5"
+            onClick={() => {
+              enviarDatosDB(cartItems);
+            }}
+          >
+            Realizar la compra
+          </Button>
+        </Link>
+      );
+    } else {
+      return (
+        <Button
+          as={Button}
+          colorScheme="teal"
+          size="md"
+          mx="2"
+          m="5"
+          onClick={() => {
+            alert("El nombre y la dirección son obligatorios.");
+          }}
+        >
+          Realizar la compra
+        </Button>
+      );
+    }
+  };
+
+  const enviarDatosDB = (item) => {
+    let idPedido = "000" + random;
+    let productosCantidades = "";
+    let precioTotal = 0;
+    setIdOrden(idPedido);
+    setCart(0);
+    setCartItems([]);
+
+    item.map((i) => {
+      precioTotal += i[1] * i[2];
+      productosCantidades += `${i[0]} (${i[2]}), `;
+    });
+
+    setDoc(doc(db, "ordenes", idPedido), {
+      productos_: productosCantidades,
+      precio_total_: precioTotal,
+      cliente_: cliente,
+      direccion_: direccion,
+      observacion_: observacion,
+      fecha_: hoy.toUTCString(),
+    });
+  };
 
   return (
     <>
@@ -68,22 +137,46 @@ const Checkout = () => {
       <Container className="cart-container">
         <FormControl>
           <Box>
-            <FormLabel>¿Cuál es tu nombre?</FormLabel>
-            <Input type="text" />
-            <FormLabel>Dirección</FormLabel>
-            <Input type="text" />
+            <FormLabel>¿Cuál es tu nombre?*</FormLabel>
+            <Input
+              type="text"
+              onChange={(e) => {
+                setCliente(e.target.value);
+              }}
+            />
+            <FormLabel>Dirección*</FormLabel>
+            <Input
+              type="text"
+              onChange={(e) => {
+                setDireccion(e.target.value);
+              }}
+            />
           </Box>
           <FormLabel>Observaciones</FormLabel>
-          <Textarea></Textarea>
+          <Textarea
+            onChange={(e) => {
+              setObservacion(e.target.value);
+            }}
+          ></Textarea>
           <br />
           <br />
           <Flex justify="center">
             <Box className="btn-send">
-              <Link to={`/brief`}>
-                <Button as={Button} colorScheme="teal" size="md" mx="2" m="5">
+              <VerificaFormulario name={cliente} address={direccion} />
+              {/* <Link to={`/brief`}>
+                <Button
+                  as={Button}
+                  colorScheme="teal"
+                  size="md"
+                  mx="2"
+                  m="5"
+                  onClick={() => {
+                    enviarDatosDB(cartItems);
+                  }}
+                >
                   Realizar la compra
                 </Button>
-              </Link>
+              </Link> */}
             </Box>
           </Flex>
         </FormControl>
