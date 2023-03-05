@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { CounterContext } from "../context/CounterContext";
 import { Link } from "react-router-dom";
 import { Text, Flex, Button } from "@chakra-ui/react";
 
 const Brief = () => {
-  const { idOrden, setIdOrden } = useContext(CounterContext);
+  const { idOrden } = useContext(CounterContext);
 
   return (
     <>

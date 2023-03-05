@@ -1,7 +1,7 @@
 import React from "react";
-import ItemQuantitySelector from "./ItemQuantitySelector";
 import { useState, useEffect } from "react";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
+import ItemQuantitySelector from "./ItemQuantitySelector";
 import {
   Card,
   CardBody,

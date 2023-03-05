@@ -1,8 +1,7 @@
-import React from "react";
-import ItemList from "./ItemList";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
+import ItemList from "./ItemList";
 import { Heading, Center } from "@chakra-ui/react";
 
 const ItemListContainer = () => {

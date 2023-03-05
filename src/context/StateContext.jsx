@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+import React, { useState } from "react";
 import { CounterContext } from "./CounterContext";
 
 const StateContext = ({ children }) => {

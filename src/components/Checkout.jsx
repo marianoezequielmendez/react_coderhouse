@@ -1,34 +1,29 @@
 import React, { useContext, useState } from "react";
 import { CounterContext } from "../context/CounterContext";
 import { Link } from "react-router-dom";
-import { collection, getFirestore, addDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import {
   FormControl,
   FormLabel,
   Input,
-  FormHelperText,
   Button,
   Container,
   Box,
   Textarea,
   Flex,
-  Spacer,
-  ButtonGroup,
-  Stack,
   Heading,
   Image,
   Text,
-  Avatar,
-  IconButton,
+  Card,
+  CardHeader,
+  CardBody,
 } from "@chakra-ui/react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
-import { doc, setDoc } from "firebase/firestore";
 
 const Checkout = () => {
   const tiempoTranscurrido = Date.now();
   const hoy = new Date(tiempoTranscurrido);
   const db = getFirestore();
-  const { cart, setCart, cartItems, setCartItems, setIdOrden } =
+  const { setCart, cartItems, setCartItems, setIdOrden } =
     useContext(CounterContext);
   const [cliente, setCliente] = useState("");
   const [direccion, setDireccion] = useState("");
@@ -163,20 +158,6 @@ const Checkout = () => {
           <Flex justify="center">
             <Box className="btn-send">
               <VerificaFormulario name={cliente} address={direccion} />
-              {/* <Link to={`/brief`}>
-                <Button
-                  as={Button}
-                  colorScheme="teal"
-                  size="md"
-                  mx="2"
-                  m="5"
-                  onClick={() => {
-                    enviarDatosDB(cartItems);
-                  }}
-                >
-                  Realizar la compra
-                </Button>
-              </Link> */}
             </Box>
           </Flex>
         </FormControl>

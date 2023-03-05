@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Stack, Button } from "@chakra-ui/react";
 import { CounterContext } from "../context/CounterContext";
+import { Stack, Button } from "@chakra-ui/react";
 
 const ItemQuantitySelector = ({ stock }) => {
   const { counter, setCounter } = useContext(CounterContext);

@@ -2,30 +2,18 @@ import React, { useContext } from "react";
 import { CounterContext } from "../context/CounterContext";
 import { Link } from "react-router-dom";
 import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormHelperText,
   Button,
-  Container,
-  Box,
-  Textarea,
   Flex,
   Spacer,
   ButtonGroup,
-} from "@chakra-ui/react";
-import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
-import { Icon, createIcon } from "@chakra-ui/react";
 
 const Cart = () => {
   let precioTotal = 0;
@@ -76,7 +64,7 @@ const Cart = () => {
             </Thead>
             <Tbody>
               {cartItems.map((item) => (
-                <Tr key={item.id}>
+                <Tr key={item[0]}>
                   <Td>{item[0]}</Td>
                   <Td>{item[2]}</Td>
                   <Td>${item[1] * item[2]}</Td>

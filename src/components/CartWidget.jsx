@@ -3,7 +3,7 @@ import { CounterContext } from "../context/CounterContext";
 import { Button } from "@chakra-ui/react";
 
 const CartWidget = () => {
-  const { cart, setCart } = useContext(CounterContext);
+  const { cart } = useContext(CounterContext);
   return (
     <>
       <Button colorScheme="gray" size="md" color="#262626">

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import ItemQuantitySelector from "./ItemQuantitySelector";
 import { CounterContext } from "../context/CounterContext";
+import { Link } from "react-router-dom";
+import ItemQuantitySelector from "./ItemQuantitySelector";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Image,
@@ -18,10 +18,9 @@ import {
   Box,
   Spacer,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 
 const ItemDetail = ({ product }) => {
-  const { counter, setCounter, cart, setCart, cartItems, setCartItems } =
+  const { counter, setCounter, cart, setCart, cartItems } =
     useContext(CounterContext);
   return (
     <>

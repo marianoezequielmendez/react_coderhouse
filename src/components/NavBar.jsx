@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import CartWidget from "./CartWidget";
-import { Container, Flex, Spacer, Box, Heading } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import Sections from "./Sections";
 import { CounterContext } from "../context/CounterContext";
+import { Link } from "react-router-dom";
+import CartWidget from "./CartWidget";
+import Sections from "./Sections";
+import { Container, Flex, Spacer, Box, Heading } from "@chakra-ui/react";
 
 const NavBar = () => {
   const { cart } = useContext(CounterContext);
